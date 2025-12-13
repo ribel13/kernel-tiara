@@ -21,7 +21,7 @@ on:
       kernel_version:
         description: "Select kernel version"
         required: false
-        default: "6.12.y"
+        default: "6.6.y"
         type: choice
         options:
           - 5.4.y
@@ -76,20 +76,11 @@ on:
       kernel_sign:
         description: "Set the kernel custom signature"
         required: false
-        default: "-ophub"
+        default: "-freedom"
         type: choice
         options:
           - -ophub
-          - -happy-new-year
-          - -dragon-boat-festival
-          - -mid-autumn-festival
-          - -happy-national-day
-          - -merry-christmas
-          - -spring-plowing
-          - -summer-growing
-          - -autumn-harvesting
-          - -winter-storing
-          - -mutiara-wrt
+          - -freedom
       kernel_config:
         description: "Set the path of kernel .config"
         required: false
@@ -100,7 +91,7 @@ on:
           - false
 
 env:
-  TZ: Etc/UTC
+  TZ: Asia/Jakarta
 
 jobs:
   build:
@@ -130,8 +121,8 @@ jobs:
           sudo -E apt-get clean
           sudo sed -i '/NVM_DIR/d;/skel/d' /root/{.bashrc,.profile}
           sudo rm -rf ~/{.cargo,.dotnet,.rustup}
-          sudo -E timedatectl set-timezone "${TZ:-Etc/UTC}"
-          sudo -E ntpdate ntp.ubuntu.com 0.pool.ntp.org || true
+          sudo -E timedatectl set-timezone "${TZ:-Asia/Jakarta}"
+          sudo -E ntpdate ntp.ubuntu.com 0.id.pool.ntp.org || true
           sudo -E timedatectl set-ntp true
           date -u
           timedatectl status || true
